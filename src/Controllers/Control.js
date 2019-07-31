@@ -4,14 +4,14 @@ class Control extends Component{
     render(){
         return(
             <ul>
-                <li><input type="button" value="create" onClick={function(e){
+                <li><a href="/create" onClick={function(e){
                     e.preventDefault();
                     this.props.onChangeMode('create');
-                }.bind(this)}></input></li>
-                <li><input type="button" value="update" onClick={function(e){
+                    }.bind(this)}>create</a></li>
+                <li><a href="/update" onClick={function(e){
                     e.preventDefault();
                     this.props.onChangeMode('update');
-                    }.bind(this)}></input></li>
+                    }.bind(this)}>update</a></li>
                 <li><input onClick={function(e){
                     e.preventDefault();
                     this.props.onChangeMode('delete');

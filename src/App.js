@@ -10,6 +10,7 @@ class App extends Component {
   // state값 초기화, props값 setting, Component가 실행될 때 render() 보다 먼저 실행되면서 Component 초기화
   constructor(props){
     super(props);
+    this.max_content_id=3;
     this.state={
       mode:'welcome',
       selected_content_id:2,
@@ -44,7 +45,24 @@ class App extends Component {
       }
       _article=<Content title={_title} desc={_desc}></Content>
     }else if( this.state.mode==='create'){
-      _article=<CreateContent></CreateContent>
+      _article=<CreateContent onSubmit={function(_title, _desc){
+        // if submit, add content to this.state.contents
+        this.max_content_id=this.max_content_id + 1;
+
+        // 기존 데이터는 건들지 말고 새로운 데이터 생성.
+        // 덮어쓰지 말기
+        /*this.state.contents.push(
+          {id:this.max_content_id, title:_title, desc:_desc}
+        );*/
+
+        this.state.contents.concat(
+          {id:this.max_content_id, title:_title, edesc:_desc}
+        )
+        this.setState({
+          contents:this.state.contents
+        });
+
+      }.bind(this)}></CreateContent>
     }
     return (
      <div className="App">
